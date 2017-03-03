@@ -4,49 +4,59 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Djupp on 28.02.2017.
+ * Created by Prog on 03.03.2017.
  */
-public class FrameOff extends JFrame {
+public class WindowOffPanel extends JFrame {
+    private JLabel countLabel;
+    private JButton cancelBatton;
+    private JButton offButton;
+    String message = "";
 
-    private static void frameDisplayCenter (int sizeWidth, int sizeHeight, JFrame frame) {
+    //Рсположение окна по центру
+    private static void frameDisplayCenter(int sizeWidth, int sizeHeight, JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight);
     }
 
-
-    private JLabel countLabel;
-    private JButton cancelBatton;
-    private JButton offButton;
-    String message = "";
-
-
     public static void main(String[] args) {
 
-        FrameOff app = new FrameOff();
+        WindowOffPanel app = new WindowOffPanel();
         app.setVisible(true);
-        frameDisplayCenter(700,500, app);
-        // app.pack();
+        frameDisplayCenter(700, 600, app);
+
     }
 
-    public FrameOff() {
-        super("Window");
-        setSize(400, 400);
+    public WindowOffPanel() {
+        super("Пробное окно");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //расположение кнопо
 
-        countLabel = new JLabel("Итого: " + message);
+        JLabel countLabel = new JLabel("Итого: " + message);
+        JButton cancelBatton = new JButton("Cancel");
+        JButton offButton = new JButton("Off");
 
-        cancelBatton = new JButton("Cancel");
-        offButton = new JButton("Off");
         JPanel buttonsPanel = new JPanel(new FlowLayout());
-        add(countLabel, BorderLayout.CENTER);
+        buttonsPanel.setLayout(null);
 
+        countLabel.setSize(50,50);
+        countLabel.setLocation(350,50);
+        buttonsPanel.add(countLabel);
 
+        cancelBatton.setSize(100, 100);
+        cancelBatton.setLocation(200, 250);
         buttonsPanel.add(cancelBatton);
+
+        offButton.setSize(100, 100);
+        offButton.setLocation(400, 250);
         buttonsPanel.add(offButton);
-        add(buttonsPanel, BorderLayout.SOUTH);
+
+        add(buttonsPanel);
+        setSize(700, 500);
         initListeners();
+
+
     }
 
     private void initListeners() {
@@ -71,5 +81,5 @@ public class FrameOff extends JFrame {
     private void updateWindow() {
         countLabel.setText("Итог: " + message);
     }
-}
 
+}
